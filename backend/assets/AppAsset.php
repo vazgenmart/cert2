@@ -32,7 +32,6 @@ class AppAsset extends AssetBundle
         'plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js',
         'plugins/breakpoints/breakpoints.js',
         'plugins/numerator/jquery-numerator.js',
-        'js/layout.js',
         'plugins/jquery.cookie.min.js',
     ];
     public $depends = [
