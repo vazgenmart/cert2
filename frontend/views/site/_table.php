@@ -12,7 +12,7 @@
         <?php foreach ($res as $item): ?>
             <tr id="tr2">
                 <td><?= $item->type;?></td>
-                <td><?= $item->sds;?></td>
+                <td><?= implode(', ',$item->sds);?></td>
                 <td><?= $item->accreditation_certificate;?></td>
                 <td><?= $item->cert_created_date;?></td>
                 <td><?= $item->cert_end_date;?></td>
