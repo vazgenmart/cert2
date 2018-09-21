@@ -15,6 +15,7 @@ use Yii;
  * @property string $cert_end_date
  * @property string $description
  * @property int $is_valid
+ * @property int $user_id
  */
 class Organizations extends \yii\db\ActiveRecord
 {
@@ -33,7 +34,7 @@ class Organizations extends \yii\db\ActiveRecord
     {
         return [
             [['type', 'description'], 'string'],
-            [['cert_created_date', 'cert_end_date', 'sds'], 'safe'],
+            [['cert_created_date', 'cert_end_date', 'sds', 'safe'], 'safe'],
             [['is_valid'], 'integer'],
             [['accreditation_certificate'], 'string', 'max' => 255],
         ];
@@ -41,11 +42,14 @@ class Organizations extends \yii\db\ActiveRecord
 
     public function beforeValidate()
     {
+
         if (is_array($this->sds)) {
             $this->sds = serialize($this->sds);
         }
+
         return parent::beforeValidate();
     }
+
     /**
      * {@inheritdoc}
      */
@@ -60,6 +64,7 @@ class Organizations extends \yii\db\ActiveRecord
             'cert_end_date' => 'Действителен по',
             'description' => 'Сведения',
             'is_valid' => 'Соответствует требованиям',
+            'user_id' => 'Клиент',
         ];
     }
 
@@ -67,5 +72,11 @@ class Organizations extends \yii\db\ActiveRecord
     {
         $this->sds = unserialize($this->sds);
         return parent::afterFind();
+    }
+
+    public function beforeSave($insert)
+    {
+        $this->user_id = Yii::$app->user->id;
+        return parent::beforeSave($insert);
     }
 }

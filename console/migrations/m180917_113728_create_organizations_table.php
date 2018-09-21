@@ -20,7 +20,8 @@ class m180917_113728_create_organizations_table extends Migration
             'cert_created_date' => $this->date(),
             'cert_end_date' => $this->date(),
             'description' => $this->text(),
-            'is_valid' => $this->boolean()->defaultValue(false)
+            'is_valid' => $this->boolean()->defaultValue(false),
+            'user_id' => $this->integer()
         ]);
     }
 
